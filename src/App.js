@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react';
+import ExpenseData from "./Data/ExpenseData";
+import Expense from './components/Expense/Expense';
+import AddExpense from './components/AddExpense/AddExpense';
 
 function App() {
+const [newExpense, setNewExpense] = useState(ExpenseData);
+  const getFormDataByLiftUp = (data) => {
+setNewExpense((expensedata)=> {
+return [data, ...expensedata];
+});
+  }
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+     <AddExpense liftUpData={getFormDataByLiftUp} />
+      <Expense items={newExpense} />
     </div>
   );
 }
